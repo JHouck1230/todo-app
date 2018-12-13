@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 import { TodoItem }  from './todo-item';
 import { TodoList } from  './todo-list';
@@ -6,7 +13,19 @@ import { TodoList } from  './todo-list';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(250)
+      ]),
+      transition('* => void', [
+        animate(250, style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class AppComponent {
 
@@ -16,7 +35,6 @@ export class AppComponent {
     id: 16,
     completed: false
   };
-
   selectAll = false;
 
   markComplete(event, item) {
