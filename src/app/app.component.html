@@ -1,0 +1,74 @@
+<div class="container-fluid">
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Another To-do List</h1>
+      <p class="lead">This is just another to-do list built with <a href="https://angular.io/" target="_blank">Angular 7</a> and <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> (supplemented with <a href="https://valor-software.com/ngx-bootstrap/#/" target="_blank">Ngx-Bootstrap</a>) for the front end.<!--  <a href="https://nodejs.org/en/" target="_blank">Node</a> and <a href="https://expressjs.com/" target="_blank">Express</a> are serving this on the back end. --></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <form
+      class="col-8 mx-auto input-group mb-3"
+      (ngSubmit)="saveTodo($event, newTodoForm)"
+      #newTodoForm="ngForm"
+      novalidate
+      >
+      <input
+        aria-label="Enter a to-do item"
+        aria-describedby="save"
+        class="form-control"
+        name="description"
+        ngModel
+        placeholder="Enter a New To-do Item"
+        required
+        type="text"
+        >
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-primary"
+          id="save"
+          type="submit"
+          >Save</button>
+      </div>
+    </form>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Completed</th>
+        <th scope="col">To-do Item</th>
+        <th scope="col">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of todoList; index as i">
+        <td class="comp-col">
+          <button
+            class="btn btn-sm btn-outline-primary d-flex align-items-center mx-auto"
+            (click)="markComplete($event, item)"
+            placement="right"
+            tooltip="Mark Complete"
+            type="button"
+            >
+            <span class="icon-checkmark" *ngIf="item.completed"></span>
+          </button>
+        </td>
+        <td class="desc-col" [ngStyle]="{ 'text-decoration': item.completed ? 'line-through' : 'none' }">
+          <span>{{ item.description }}</span>
+        </td>
+        <td class="del-col">
+          <button
+            class="btn btn-sm btn-outline-danger d-flex align-items-center mx-auto"
+            (click)="removeItem($event, i)"
+            tooltip="Delete Item"
+            >
+            <span class="icon-cross"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
