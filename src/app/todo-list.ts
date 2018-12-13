@@ -25,5 +25,10 @@ export const TodoList: TodoItem[] = [
     description: 'Read a Book',
     id: 11,
     completed: false
+  },
+  {
+    description: 'Eat Pizza',
+    id: 10,
+    completed: false
   }
-]
+];
